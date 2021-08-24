@@ -1,0 +1,88 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: ocean-compute-operator
+  name: ocean-compute-operator
+  namespace: ocean-compute
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: ocean-compute-operator
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: ocean-compute-operator
+    spec:
+      containers:
+      - env:
+        - name: AWS_ACCESS_KEY_ID
+          value: "AWS_ACCESS_KEYID"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "AWS_SECRET_ACCESSKEY"
+        - name: AWS_REGION
+          value: "AWS_REGION_KEY"
+        - name: AWS_BUCKET_OUTPUT
+          value: "AWS_BUCKET_OUTPUT_KEY"
+        - name: AWS_BUCKET_ADMINLOGS
+          value: "AWS_BUCKET_ADMINLOGS_KEY"
+        - name: IPFS_EXPIRY_TIME
+          value: "3600"
+        - name: STORAGE_CLASS
+          value: standard
+        - name: LOG_LEVEL
+          value: DEBUG
+        - name: POD_CONFIGURATION_CONTAINER
+          value: oceanprotocol/pod-configuration:latest
+        - name: POD_PUBLISH_CONTAINER
+          value: oceanprotocol/pod-publishing:latest
+        - name: POSTGRES_DB
+
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_DB
+              name: postgres-config
+        - name: POSTGRES_USER
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_USER
+              name: postgres-config
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_PASSWORD
+              name: postgres-config
+        - name: POSTGRES_HOST
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_HOST
+              name: postgres-config
+        - name: POSTGRES_PORT
+          valueFrom:
+            configMapKeyRef:
+              key: POSTGRES_PORT
+              name: postgres-config
+        image: deltadao/operator-engine:latest
+        imagePullPolicy: Always
+        name: ocean-compute-operator
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      imagePullSecrets:
+      - name: regcred
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      serviceAccount: db-operator
+      serviceAccountName: db-operator
+      terminationGracePeriodSeconds: 30
