@@ -26,7 +26,7 @@ spec:
         - name: ARTIFACTS_PATH
           value: /provider/artifacts/
         - name: NETWORK_URL
-          value: http://172.31.31.183:8545
+          value: https://rpc.gaiaxtestnet.oceanprotocol.com/
         - name: PROVIDER_PRIVATE_KEY
           value: "PROVIDER_PRIVATEKEY"
         - name: LOG_LEVEL
