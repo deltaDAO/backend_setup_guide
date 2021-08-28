@@ -59,7 +59,7 @@ spec:
         - name: METADATA_CONTRACT_BLOCK
           value: "177644"
         - name: NETWORK_URL
-          value: http://172.31.31.183:8545
+          value: https://rpc.gaiaxtestnet.oceanprotocol.com/
         - name: NETWORK_NAME
           value: gaiaxtestnet
         - name: EVENTS_RPC
