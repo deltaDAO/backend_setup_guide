@@ -7,5 +7,5 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 curl -Lo minikube https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64; \
 chmod +x minikube; \
 sudo cp minikube /usr/local/bin && rm minikube
-sudo groupadd docker; sudo usermod -aG docker $USER
+sudo groupadd docker; sudo usermod -aG docker $USER && newgrp docker
 systemctl start docker.service
