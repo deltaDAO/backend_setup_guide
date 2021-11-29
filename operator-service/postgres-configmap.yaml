@@ -7,6 +7,6 @@ metadata:
 data:
   POSTGRES_DB: ocean
   POSTGRES_USER: postgresadmin
-  POSTGRES_PASSWORD: J$ktE4LU^9Tk9!
+  POSTGRES_PASSWORD: 'FF5z5&#5t9#L*4'
   POSTGRES_HOST: postgres.ocean-operator.svc.cluster.local
   POSTGRES_PORT: "5432"

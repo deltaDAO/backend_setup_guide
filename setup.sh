@@ -21,14 +21,14 @@ read -p "Please Enter PROVIDER_PRIVATE_KEY:"$'\n' PROVIDER_PRIVATE_KEY
 read -r -p "Everything inserted right? [y/N] " response
 if [[ "$response" =~ ^([yY][eE][sS]|[yY])$ ]]
 then
-     sed -i 's/OCEAN_ADDRESS_KEY/'"$OCEAN_ADDRESS_KEY"'/g' aquarius/aquarius-events-rinkeby-deployment.yaml
-     sed -i 's/PROVIDER_ADDRESS_KEY/'"$OCEAN_ADDRESS_KEY"'/g' provider/provider-standard-networks-deployment-example.yaml
+     sed -i 's/OCEAN_ADDRESS_KEY/'"$OCEAN_ADDRESS_KEY"'/g' aquarius/aquarius-events-gaiaxtestnet-deployment.yaml
+     sed -i 's/PROVIDER_ADDRESS_KEY/'"$OCEAN_ADDRESS_KEY"'/g' provider/provider-deployment.yaml
      sed -i 's/AWS_ACCESS_KEYID/'"$AWS_ACCESS_KEY_ID"'/g' operator-engine/operator.yml
      sed -i 's/AWS_SECRET_ACCESSKEY/'"$AWS_SECRET_ACCESS_KEY"'/g' operator-engine/operator.yml
      sed -i 's/AWS_REGION_KEY/'"$AWS_REGION_KEY"'/g' operator-engine/operator.yml
      sed -i 's/AWS_BUCKET_OUTPUT_KEY/'"$AWS_BUCKET_OUTPUT_KEY"'/g' operator-engine/operator.yml
      sed -i 's/AWS_BUCKET_ADMINLOGS_KEY/'"$AWS_BUCKET_ADMINLOGS_KEY"'/g' operator-engine/operator.yml
-     sed -i 's/PROVIDER_PRIVATEKEY/'"$PROVIDER_PRIVATE_KEY"'/g' provider/provider-standard-networks-deployment-example.yaml
+     sed -i 's/PROVIDER_PRIVATEKEY/'"$PROVIDER_PRIVATE_KEY"'/g' provider/provider-deployment.yaml
 	    
 fi
 
@@ -44,7 +44,7 @@ clear
 echo -e "Deploy Aquarius and Elasticsearch with following steps:\n
 1. kubectl config set-context --current --namespace ocean\n
 2. kubectl apply -f aquarius/elasticsearch-master-sts.yaml\n
-3. kubectl apply -f aquarius/aquarius-events-rinkeby-deployment.yaml\n
+3. kubectl apply -f aquarius/aquarius-events-gaiaxtestnet-deployment.yaml\n
 4. kubectl apply -f aquarius/aquarius-deployment.yaml\n
 5. kubectl port-forward --namespace ocean svc/elasticsearch-master 9200:9200\n
 Press RETURN if you are finished for the next steps."
@@ -78,7 +78,7 @@ echo -e "Expose the Operator-Service and Initialize database with the following 
 echo -e "If you have initialized the database press RETURN to continue."
 read return_button
 clear
-echo -e "Switch to namespace ocean\n 1. kubectl config set-context --current --namespace ocean\n Deploy the provider with:\n 2. kubectl apply -f provider/provider-standard-networks-deployment-example.yaml\n If you have done every single step your environment should be up and running."
+echo -e "Switch to namespace ocean\n 1. kubectl config set-context --current --namespace ocean\n Deploy the provider with:\n 2. kubectl apply -f provider/provider-deployment.yaml\n If you have done every single step your environment should be up and running."
 
 
 

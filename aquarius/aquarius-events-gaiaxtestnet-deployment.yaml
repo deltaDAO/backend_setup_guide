@@ -2,15 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: aquarius-events-rinkeby
-  name: aquarius-events-rinkeby
+    app: aquarius-events-gaiaxtestnet
+  name: aquarius-events-gaiaxtestnet
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: aquarius-events-rinkeby
+      app: aquarius-events-gaiaxtestnet
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,7 +20,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: aquarius-events-rinkeby
+        app: aquarius-events-gaiaxtestnet
     spec:
       containers:
       - env:
@@ -70,7 +70,7 @@ spec:
           value: "100"
         - name: EVENTS_HTTP
           value: "1"
-        image: oceanprotocol/aquarius:v3.0.0
+        image: oceanprotocol/aquarius:v3.1.2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
@@ -82,7 +82,7 @@ spec:
           periodSeconds: 10
           successThreshold: 1
           timeoutSeconds: 1
-        name: aquarius-events-rinkeby
+        name: aquarius-events-gaiaxtestnet
         ports:
         - containerPort: 5000
           protocol: TCP

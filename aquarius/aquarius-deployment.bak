@@ -2,15 +2,15 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: aquarius-events-rinkeby
-  name: aquarius-events-rinkeby
+    app: aquarius
+  name: aquarius
 spec:
   progressDeadlineSeconds: 600
   replicas: 1
   revisionHistoryLimit: 5
   selector:
     matchLabels:
-      app: aquarius-events-rinkeby
+      app: aquarius
   strategy:
     rollingUpdate:
       maxSurge: 25%
@@ -20,7 +20,7 @@ spec:
     metadata:
       creationTimestamp: null
       labels:
-        app: aquarius-events-rinkeby
+        app: aquarius
     spec:
       containers:
       - env:
@@ -29,7 +29,7 @@ spec:
         - name: AQUARIUS_BIND_URL
           value: http://0.0.0.0:5000
         - name: AQUARIUS_WORKERS
-          value: "1"
+          value: "4"
         - name: DB_HOSTNAME
           value: elasticsearch-master.ocean.svc.cluster.local:9200
         - name: DB_MODULE
@@ -47,42 +47,28 @@ spec:
         - name: DB_SSL
           value: "false"
         - name: RUN_AQUARIUS_SERVER
-          value: "0"
-        - name: RUN_EVENTS_MONITOR
           value: "1"
+        - name: RUN_EVENTS_MONITOR
+          value: "0"
+        - name: EVENTS_ALLOW
+          value: "0"
         - name: CONFIG_FILE
           value: config.ini
         - name: ALLOWED_PUBLISHERS
           value: '[""]'
-        - name: BFACTORY_BLOCK
-          value: "0"
-        - name: METADATA_CONTRACT_BLOCK
-          value: "177644"
-        - name: NETWORK_URL
-          value: https://rpc.gaiaxtestnet.oceanprotocol.com/
-        - name: NETWORK_NAME
-          value: gaiaxtestnet
-        - name: EVENTS_RPC
-          value: https://rpc.gaiaxtestnet.oceanprotocol.com/
-        - name: OCEAN_ADDRESS
-          value: "OCEAN_ADDRESS_KEY"
-        - name: BLOCKS_CHUNK_SIZE
-          value: "100"
-        - name: EVENTS_HTTP
-          value: "1"
-        image: oceanprotocol/aquarius:v3.0.0
+        image: oceanprotocol/aquarius:v3.1.2
         imagePullPolicy: IfNotPresent
         livenessProbe:
           failureThreshold: 3
           httpGet:
             path: /
-            port: 5001
+            port: 5000
             scheme: HTTP
           initialDelaySeconds: 20
           periodSeconds: 10
           successThreshold: 1
-          timeoutSeconds: 1
-        name: aquarius-events-rinkeby
+          timeoutSeconds: 2
+        name: aquarius
         ports:
         - containerPort: 5000
           protocol: TCP
@@ -90,7 +76,7 @@ spec:
           failureThreshold: 3
           httpGet:
             path: /
-            port: 5001
+            port: 5000
             scheme: HTTP
           initialDelaySeconds: 20
           periodSeconds: 10

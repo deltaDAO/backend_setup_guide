@@ -45,7 +45,7 @@ spec:
           value: "PROVIDER_ADDRESS_KEY" 
         - name: OPERATOR_SERVICE_URL
           value: operator-api.ocean-operator.svc.cluster.local:8050
-        image: oceanprotocol/provider-py:latest
+        image: oceanprotocol/provider-py:v0.4.17
         imagePullPolicy: Always
         name: provider
         ports:
