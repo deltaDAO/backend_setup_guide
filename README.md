@@ -15,3 +15,5 @@ After installation the backend will listen on following ports:
 - Elasticsearch Port:           9200
 - Ocean Provider Port:          8030
 - Ocean Operator Service Port:  8050
+## Add certificate and place some nginx/haproxy/etc
+If you want your Oceanprotocol stack to be public setup. You could setup a nginx/haproxy/etc. 
