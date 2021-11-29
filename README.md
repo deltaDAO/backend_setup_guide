@@ -8,7 +8,7 @@ To deploy your own Ocean backend, you need the following tools:
 If you have cloned this repository, access it with cd backend_setup_guide.
 Then you can run the setup script with: ./setup.sh.
 The script will guide you through the setup steps that need to be done.
-If you want to start again, you can use the rest.sh script to get the initial state again.
+If you want to start again, you can use the rest.sh script to get back to the initial state.
 ## After installation
 After installation the backend will listen on following ports:
 - Aquarius Port:                5000
